@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Monophonic 53edo Pitch Input Prototype | Erik Natanael Gustafsson</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="For several years I have been dreaming of alternatives to 12edo (edo = Equal Division of the Octave). temperaments that would allow for more harmonic expressivity as well as simply more in tune chords,. as I've found the thirds on 12edo keyboard instruments to be really quite harsh, especially when. using a harmonicall" />
+    <meta name="keywords" content="music, live electronics, DMI, digital musical instrument, audiovisual, composer" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="https://eriknatanael.comblog/monophonic-53edo-pitch-input-prototype" />
+
+                        
+            
+    <link href="/user/plugins/breadcrumbs/css/breadcrumbs.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/external_links/assets/css/external_links.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/form/assets/form-styles.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/youtube/css/youtube.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/highlight/css/ir-black.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.gallery.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/login/css/login.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre-exp.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/system/assets/jquery/jquery-2.x.min.js"></script>
+<script src="/user/plugins/highlight/js/highlight.pack.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.min.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.gallery.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+<script>
+$(document).ready(function(){
+    $('a[rel="lightbox"]').featherlightGallery({
+        openSpeed: 250,
+        closeSpeed: 250,
+        closeOnClick: 'background',
+        closeOnEsc: '1',
+        root: 'body'
+    });
+});
+</script>
+
+</head>
+<body id="top" class=" header-fixed header-animated header-dark header-transparent sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+                    
+<div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/" itemid="/">
+                    <span itemprop="name">Home</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="1" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/blog" itemid="/blog">
+                    <span itemprop="name">Blog</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="2" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span itemscope itemtype="http://schema.org/Thing" itemprop="item" itemid="/blog/monophonic-53edo-pitch-input-prototype">
+                    <span itemprop="name">Monophonic 53edo Pitch Input Prototype</span>
+                </span>
+                            <meta itemprop="position" content="3" />
+    </span>
+    </div>
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/monophonic-53edo-pitch-input-prototype" class="u-url">Monophonic 53edo Pitch Input Prototype</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2020-06-07T19:25:00+02:00">
+        <i class="fa fa-calendar"></i> 7th Jun 2020
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:53edo#body-wrapper">53edo</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:DMI#body-wrapper">DMI</a>
+    </span>
+    </div>
+    <div class="e-content">
+        <p>For several years I have been dreaming of alternatives to 12edo (edo = Equal Division of the Octave)
+temperaments that would allow for more harmonic expressivity as well as simply more in tune chords,
+as I've found the thirds on 12edo keyboard instruments to be really quite harsh, especially when
+using a harmonically rich sound such as a sawtooth waveform. My earlier digital musical instruments
+have tried to cope with this by banishing quantised pitch altogether in a similar way to fretless
+string instruments (disregarding the guide and resonance provided by the open strings). But maybe using a more fine-grained grid like 53edo will provide a way to theorise
+around pitch in a more open way and through that open up to new ideas and musical opportunities.</p>
+<h2>Proving It Technically Works</h2>
+<div class="grav-youtube">
+    <iframe src="https://www.youtube-nocookie.com/embed/ZkfwQGc83XA?color=white&rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+<p>Yay, it works! It's not the easiest instrument I've ever played, my brain has not incorporated the grips yet, which is good because now that I've proven it works I'm going to start changing stuff. I'll just explain how it works first.</p>
+<h2>53edo</h2>
+<p><a href="https://eriknatanael.com/blog/how_to_get_better_pitches_53edo_part1" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">In a previous blog post I introduce 53edo</a> and some of its benefits and challenges. 53edo has been
+known about for a long time (Chinese music theorist Ching Fang (78–37 BCE), Nicholas Mercator
+(c. 1620–1687), Isaac Newton (1642 - 1727), RHM Bosanquet made a keyboard for it in 1872-3 etc), but
+has an unwieldy number of notes for a mechanical/acoustic instrument. Too many strings to tune and
+too expensive to produce instruments with so many parts. (As an aside, 53edo has seen some use in
+Turkish music and I need to do more research into how the Turkish instruments make use of it.)</p>
+<h2>Pitch Input Method</h2>
+<p>An idea started to form that digital technology might make this large nunmber of pitches easier to
+handle. Taking inspiration both from keyed wind instruments I figured that fingers are quite good at
+manipulating a number of on/off switches. The most efficient way to get many values out of a number
+of switches is by treating them as a binary number. With a binary number, the maximum number that
+can be written is (2^n)-1 where n is the number of bits (in this case switches/buttons). With one
+button per finger of one hand we therefore can represent values between 0 and 31, exactly a 53edo
+perfect fifth.</p>
+<p>The note input on this prototype therefore works like a binary number using the first 5 buttons,
+each of them adding 1, 2, 4, 8, or 16 to the total note value. In addition to this there is a button
+that adds 31 which is one less than the 32 that would have made it continuation of the binary
+number, but since 31 is a perfect fifth it creates a nice symmetry that makes it easier to play. The
+octave buttons also trigger and hold the note.</p>
+<h2>Some 7th Chords</h2>
+<div class="grav-youtube">
+    <iframe src="https://www.youtube-nocookie.com/embed/f-1F1lptvqY?color=white&rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+<p>I'm playing the 7th chords with a 7th going from a 7/4 minor harmonic 7th to a 15/8 downmajor seventh. I think these all sound quite nice and useable, but with different qualities. The minor chord seems more sensitive to the perfect fifth between the minor 3rd to the minor 7th than the major chords fifth between the major 3rd and the major 7th.</p>
+<h2>Where To Go From Here</h2>
+<p>The nanoPAD is not great for the purpose I'm using it for since I need to press really quite hard to get the pads to register as on so the next step will be to build a paper prototype using capacitive sensors that require no force to activate. I'm also evaluating including extra optional buttons to make certain things easier to play, or rather I'm having my computer crunch the numbers on what buttons make certain things (such as scales, chords and melodies in 5-limit-ish subsets) take less finger movement to play.</p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/3d-printable-models-with-openframeworks"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/tech-art-and-the-environment">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+<div class="sidebar-content">
+    <h4>Popular Tags</h4>
+    
+<span class="tags">
+                    <a class="label label-rounded label-secondary" href="/blog/tag:53edo">53edo</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:music">music</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:DMI">DMI</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:scarda">scarda</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:Neod">Neod</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:sustainability">sustainability</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:audiovisual">audiovisual</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:point clouds">point clouds</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:harmony">harmony</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:programming">programming</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:rust">rust</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:bela">bela</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:reflections">reflections</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:visuals">visuals</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:development">development</a>
+    </span>
+</div>
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section">
+    <section class="container grid-lg">
+        <p>© Erik Natanael Gustafsson 2023
+        <i class="fa fa-heart-o pulse "></i>
+        <a href="https://www.facebook.com/eriknatanaelmusic"/><i class="fa fa-facebook"></i></a>
+        <a href="https://www.instagram.com/eriknatanaelgustafsson/"/><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UC4vTCi42E4oiPGbbUqAh6hQ"/><i class="fa fa-youtube"></i></a>
+        <a href="https://github.com/ErikNatanael"/><i class="fa fa-github"></i></a>
+        <a href="mailto:&#101;ri&#107;&#64;e&#114;&#105;&#107;n&#97;&#116;&#97;&#110;&#97;el.&#99;om"/><i class="fa fa-envelope-o"></i></a> </p>
+    </section>
+</section>
+    
+    <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+            </nav>
+        </div>
+    </div>
+
+    <script src="/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>

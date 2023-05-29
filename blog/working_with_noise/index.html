@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Working with noise | Erik Natanael Gustafsson</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content=". This post is an evaluation of some experiments with noise in a GLSL shader for my master's project. You can download the shader code here.Fragile aspects of working with noise. Noise is elusive, slips through your fingers. Using noise as your fundamental building block, unless you are too zoomed out to see individual" />
+    <meta name="keywords" content="music, live electronics, DMI, digital musical instrument, audiovisual, composer" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="https://eriknatanael.comblog/working_with_noise" />
+
+                        
+            
+    <link href="/user/plugins/breadcrumbs/css/breadcrumbs.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/external_links/assets/css/external_links.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/form/assets/form-styles.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/youtube/css/youtube.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/highlight/css/ir-black.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.gallery.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/login/css/login.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre-exp.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/system/assets/jquery/jquery-2.x.min.js"></script>
+<script src="/user/plugins/highlight/js/highlight.pack.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.min.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.gallery.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+<script>
+$(document).ready(function(){
+    $('a[rel="lightbox"]').featherlightGallery({
+        openSpeed: 250,
+        closeSpeed: 250,
+        closeOnClick: 'background',
+        closeOnEsc: '1',
+        root: 'body'
+    });
+});
+</script>
+
+</head>
+<body id="top" class=" header-fixed header-animated header-dark header-transparent sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+                    
+<div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/" itemid="/">
+                    <span itemprop="name">Home</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="1" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/blog" itemid="/blog">
+                    <span itemprop="name">Blog</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="2" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span itemscope itemtype="http://schema.org/Thing" itemprop="item" itemid="/blog/working_with_noise">
+                    <span itemprop="name">Working with noise</span>
+                </span>
+                            <meta itemprop="position" content="3" />
+    </span>
+    </div>
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/working_with_noise" class="u-url">Working with noise</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2019-05-21T11:09:00+02:00">
+        <i class="fa fa-calendar"></i> 21st May 2019
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:scarda#body-wrapper">scarda</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:visuals#body-wrapper">visuals</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:development#body-wrapper">development</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:DMI#body-wrapper">DMI</a>
+    </span>
+    </div>
+    <div class="e-content">
+        
+<p>This post is an evaluation of some experiments with noise in a GLSL shader for my master's project. <a href="/blog/working_with_noise/shader.frag">You can download the shader code here.</a></p>
+<h2>Fragile aspects of working with noise</h2>
+<p>Noise is elusive, slips through your fingers. Using noise as your fundamental building block, unless you are too zoomed out to see individual features, means it is almost impossible to get a completely deterministic result. Unless you are quick enough and catch a screenshot (or catch the parameter values, see below) that specific shape is gone and is never coming back. That means painting with noise is a, you guessed it, fragile exploration of parameter space where great care is needed to catch a specific result. But as previously discussed there needs to be a value that is searched for or protected for fragility to arise. How do we encourage such a value being placed on shapes arising in noise?</p>
+<p>One such way could be to allow the player/painter to save states of noise and combine several saved states together. The value then comes from the work of painstakingly finding states that fit together in a certain way. When two "images" fit together they create a value based on their relationship to eachother and their combination to a third imagined image.</p>
+<p>As eluded to above, completely uniform noise without any shaping is not fragile in itself. It is the emergent features of the noise when shaped that can be fragile.</p>
+<h2>Voronoi vs classic noise fbm</h2>
+<p>Using the <a href="https://iquilezles.org/www/articles/smoothvoronoi/smoothvoronoi.htm" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">smooth voronoi function deveoped by Inigo Quilez</a> for fractal brownian motion (or fractal noise) had the effect of giving the noise some extra definition, but also gave it a very specific look, a bit nightmarish maybe. I'll have to evaluate if I think it's worth it. For the moment I'm leaving both functions in the shader file.</p>
+<p><img alt="voronoise" src="/images/f/8/e/3/7/f8e37e5f78dfee105e2fd547fe8fe7d6bc3567bc-screenshot20190520174750.png" /></p>
+<h2>Symmetry at the micro level?</h2>
+<p>If you zoom in really close the movements around the y axis in the middle of the screen is strangely symmterical and there is a visible artefact of a slightly darker line if you zoom out slightly.</p>
+<h2>Scale</h2>
+<p>It has been easier to find nice looking results when heavily zoomed in. At a more zoomed out level the noise becomes consistent and looses a lot of its mystery.</p>
+<p><strong>Zoomed in:</strong>
+<img alt="zoomed in noise" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_113606.png" />
+<img alt="zoomed in noise" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_122318.png" />
+<img alt="zoomed in noise" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_122334.png" /></p>
+<p><strong>Zoomed out:</strong>
+<img alt="zoomed out noise" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_125833.png" />
+<img alt="zoomed out noise" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_125903.png" /></p>
+<p>I should definitely be able to make it more veil like when zoomed out. Parameters for warping the space are also much more effective when used on zoomed out versions, for example with the centerDensity parameter high:</p>
+<p><img alt="warped zoomed out" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_160704.png" />
+<img alt="warped zoomed out" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_160709.png" />
+<img alt="warped zoomed out" src="/user/pages/07.blog/Working_with_noise/Screenshot_20190521_160722.png" /></p>
+<h2>Parameter interdependence</h2>
+<p>Some parameters values work better together than others. It would therefore be helpful if I could create a mapping layer for the noise layers which maps some higher level parameters to concrete values.</p>
+<h3>Higher level events</h3>
+<ul>
+<li>zooming in/out</li>
+<li>colourising</li>
+<li>catching a shape (with variable amounts of jitter)</li>
+<li>many layers chaos vs one layer focus</li>
+<li>hard break (non-continuous parameter change, completely new)</li>
+<li>stuttering</li>
+</ul>
+<h2>Putting layers together</h2>
+<p>Putting together layers of noise with different parameters requires strategies for combining them so that different layers have different visual functions. Some such strategies:</p>
+<ul>
+<li>flickering (between different layers)</li>
+<li>blurring (to create illusion of depth)</li>
+<li>masking (for different types of noise in different parts of the screen)</li>
+<li>alpha overlay (simply combining the layers)</li>
+<li>colour combinations (?)</li>
+</ul>
+<p>Blurring and alpha overly together could create the illusion of constantly zooming in or out.</p>
+<p>Having layers zoomed in differently and then combined thrugh multiplication would allow fine tuning of tiny details in the resulting image. This could also be done on a single layer by allowing some fine tuning of the different fbm octaves.</p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+    
+            <a class="btn" href="/blog/better-pitches_-historical-overview-and-examples-of-53-edo">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+<div class="sidebar-content">
+    <h4>Popular Tags</h4>
+    
+<span class="tags">
+                    <a class="label label-rounded label-secondary" href="/blog/tag:53edo">53edo</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:music">music</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:DMI">DMI</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:scarda">scarda</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:Neod">Neod</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:sustainability">sustainability</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:audiovisual">audiovisual</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:point clouds">point clouds</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:harmony">harmony</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:programming">programming</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:rust">rust</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:bela">bela</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:reflections">reflections</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:visuals">visuals</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:development">development</a>
+    </span>
+</div>
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section">
+    <section class="container grid-lg">
+        <p>© Erik Natanael Gustafsson 2023
+        <i class="fa fa-heart-o pulse "></i>
+        <a href="https://www.facebook.com/eriknatanaelmusic"/><i class="fa fa-facebook"></i></a>
+        <a href="https://www.instagram.com/eriknatanaelgustafsson/"/><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UC4vTCi42E4oiPGbbUqAh6hQ"/><i class="fa fa-youtube"></i></a>
+        <a href="https://github.com/ErikNatanael"/><i class="fa fa-github"></i></a>
+        <a href="mailto:er&#105;k&#64;e&#114;i&#107;&#110;&#97;t&#97;n&#97;el.&#99;om"/><i class="fa fa-envelope-o"></i></a> </p>
+    </section>
+</section>
+    
+    <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+            </nav>
+        </div>
+    </div>
+
+    <script src="/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>

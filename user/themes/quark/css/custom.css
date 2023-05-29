@@ -1,0 +1,135 @@
+/* BASIC COLOR ADJUSTMENTS */
+body {
+    background-color: #141414;
+    color: #aaa;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.card {
+    background: #000000;
+}
+.label.label-secondary {
+    background: #303030;
+}
+
+a {
+    color: #fff !important;
+}
+
+a.no-line {
+    text-decoration: none;
+}
+a.no-line:hover {
+    text-decoration: none;
+    color: #75ce78 !important;
+}
+a.no-line:hover>h1 {
+    text-decoration: none;
+    color: #75ce78 !important;
+}
+
+
+.dropmenu ul li a.active, .dropmenu ul li a:focus, .dropmenu ul li a:hover {
+    color: #fff !important
+}
+.header-dark #header:not(.scrolled) a.active {
+    color: #fff !important
+}
+
+#header {
+    background: #000000;
+}
+
+#header a {
+    color: #aaa !important;
+}
+
+#header a.active {
+    color: #fff !important;
+}
+
+#header a:hover {
+    color: #fff !important;
+}
+
+.header-dark #header:not(.scrolled) .dropmenu ul ul a.active {
+    color: #fff !important;
+}
+
+.header-dark #header:not(.scrolled) .dropmenu ul ul a:hover {
+    color: #fff !important;
+}
+
+.header-dark #header:not(.scrolled) .dropmenu ul ul a {
+    color: #aaa !important;
+}
+
+#footer {
+    background-color: #000000;
+    color: #aaa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+    color: #c2c2c2;
+
+}
+
+.modular-thin-text {
+    color: #ddd;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+
+
+.dropmenu ul ul {
+    background: #000000;
+    box-shadow: 0 3px 5px rgba(0,0,0,.1);
+}
+
+.mobile-menu .button_container span {
+    background: #ccc;
+}
+
+
+/* DIFFERENT GREY BACKGROUNDS */
+
+.section.modular-text, .section.modular-features {
+    background-color: #000000;
+}
+
+.event-date {
+    border-right: 0.1em solid white;
+    text-align: right;
+}
+
+/* BLOG STUFF */
+
+.blog-listing .card {
+    box-shadow: 0 10px 45px -9px rgb(0, 0, 0);
+}
+
+.btn:focus, .btn:hover, .button:focus, .button:hover .btn-primary.button:focus, .btn-primary.button:hover, .btn.btn-primary:focus, .btn.btn-primary:hover {
+    background: #000000;
+    border-color: #75ce78;
+}
+
+.btn, .btn-primary.button, .btn.btn-primary {
+    border-color: #fff;
+    background: #000000;
+    color: #fff;
+}
+
+/* ACCENT COLOR */
+
+.tags>a {
+    color: #75ce78 !important;
+}
+
+/* #75ce78 */
+
+audio {
+    width: 100%;
+} 
+

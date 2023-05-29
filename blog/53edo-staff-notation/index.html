@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>53edo Staff Notation | Erik Natanael Gustafsson</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="When writing music in a microtonal system, one immediate concern is that of notation. Equal divisions of the octave can be written with just the step number (aka degree), often written degree backslash division, e.g. 9\53 for the 9th step of 53edo, or using the degree sign, e.g. 9°53. . . The next step after writing p" />
+    <meta name="keywords" content="music, live electronics, DMI, digital musical instrument, audiovisual, composer" />
+    <meta property="og:site_name" content="Erik Natanael Gustafsson" />
+    <meta property="og:title" content="53edo Staff Notation" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://eriknatanael.comblog/53edo-staff-notation" />
+    <meta property="og:description" content="When writing music in a microtonal system, one immediate concern is that of notation. Equal divisions of the octave can be written with just the step number (aka degree), often written degree backslash division, e.g. 9\53 for the 9th step of 53edo, or using the degree sign, e.g. 9°53. . . The next step after writing p" />
+    <meta property="og:image" content="https://eriknatanael.comuser/pages/07.blog/53edo-staff-notation/53edo staff notation header.jpg" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="https://eriknatanael.comblog/53edo-staff-notation" />
+
+                        
+            
+    <link href="/user/plugins/breadcrumbs/css/breadcrumbs.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/external_links/assets/css/external_links.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/form/assets/form-styles.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/youtube/css/youtube.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/highlight/css/ir-black.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.gallery.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/login/css/login.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre-exp.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/system/assets/jquery/jquery-2.x.min.js"></script>
+<script src="/user/plugins/highlight/js/highlight.pack.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.min.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.gallery.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+<script>
+$(document).ready(function(){
+    $('a[rel="lightbox"]').featherlightGallery({
+        openSpeed: 250,
+        closeSpeed: 250,
+        closeOnClick: 'background',
+        closeOnEsc: '1',
+        root: 'body'
+    });
+});
+</script>
+
+</head>
+<body id="top" class=" header-fixed header-animated header-dark header-transparent sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+                    
+<div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/" itemid="/">
+                    <span itemprop="name">Home</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="1" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/blog" itemid="/blog">
+                    <span itemprop="name">Blog</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="2" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span itemscope itemtype="http://schema.org/Thing" itemprop="item" itemid="/blog/53edo-staff-notation">
+                    <span itemprop="name">53edo Staff Notation</span>
+                </span>
+                            <meta itemprop="position" content="3" />
+    </span>
+    </div>
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/53edo-staff-notation" class="u-url">53edo Staff Notation</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2022-07-10T18:15:00+02:00">
+        <i class="fa fa-calendar"></i> 10th Jul 2022
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:53edo#body-wrapper">53edo</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:music#body-wrapper">music</a>
+    </span>
+    </div>
+    <div class="e-content">
+        <p>When writing music in a microtonal system, one immediate concern is that of notation. Equal divisions of the octave can be written with just the step number (aka degree), often written degree backslash division, e.g. 9\53 for the 9th step of 53edo, or using the degree sign, e.g. 9°53. </p>
+
+<p>The next step after writing pitches as numbers is to use our good old pitch names A, B, C...F, G with some modifier. A common system for doing this with EDOs is Ups and downs notation. Since 53edo is a so called sharp-5 EDO (why is outside the scope of this post), a sharp or a flat represents 5 steps up or down respectively from the natural pitch. All 53edo pitches can be written with only sharps and flats, but this is cumbersome and unintuitive. The major third of C (0\53) would be written Fb (17\53) and the step lower than that Gbbb (16\53).</p>
+<p>A better way is to fill in the four steps between naturals and flats with arrows. That way the major third over C can be written vE (pronounced "down E"). There is a reason that the arrow is in front of the letter and I will probably get back to it in later writing. Note that this system requires that the division is stated somewhere separately.</p>
+<p>This is all useful when starting out exploring and discussing, but quickly becomes inadequate; a system for writing the pitches in somewhat traditional staff notation is needed. There are several such systems, but in this post I compare and evaluate two of the most common systems for writing 53edo on staff notation, of which one (Sagittal) has two variations known as Evo(lutionary) and Revo(lutionary).</p>
+<h2>Music Notation Table</h2>
+<p>As a reference and comparison between the systems presented below, I made the following example where each pitch is written in HEJI2, Sagittal Evo, Sagittal Revo, spoken Sagittal, Ups and downs and degrees of 53edo:</p>
+<p><a href="/blog/53edo-staff-notation/53edo_staff_notation_example.pdf">53edo staff notation example.pdf</a>
+<img alt="Preview of the 53edo staff notation example pdf" src="/user/pages/07.blog/53edo-staff-notation/53edo staff notation example.jpg" /></p>
+<p>I recommend reading the pitches chords in different notation styles and reflecting on what system is easier to read.</p>
+<p>Edit 2022-07-25: It was kindly brought to my attention that Sagittal Evo/mixed Sagittal should have a gap between the Sagittal and the traditional accidental. I have updated the PDF and the tonality system file accordingly.</p>
+<h2>Extended Helmholtz-Ellis JI Pitch Notation (HEJI2)</h2>
+<p>Designed by Marc Sabat &amp; Wolfgang von Schweinitz in 2004. Since its name is really quite long, it has received the nickname HEJI2. HEJI2 doesn't officially support EDOs, but since the 53edo step size is so close to a syntonic comma, which is represented by the arrows on the accidentals, I have been using it to notate 53edo anyway.</p>
+<ul>
+<li><a href="https://marsbat.space/pdfs/notation.pdf" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://marsbat.space/pdfs/notation.pdf</a></li>
+</ul>
+<h3>Downsides</h3>
+<ul>
+<li>Hard to sight read since the arrows and other symbols are small.</li>
+<li>Can be confused with Gould arrow quarter tone notation.</li>
+<li>Many new symbols if we want to write higher limit JI intervals.</li>
+<li>Not officially compatible with EDOs.</li>
+</ul>
+<h3>Upsides</h3>
+<ul>
+<li>Easy to learn the most basic symbols as they are based on ordinary accidentals.</li>
+<li>Consistent and well thought out system for JI.</li>
+<li>Historically based.</li>
+<li>Older and seems somewhat better known than Sagittal, at least along musicians.</li>
+</ul>
+<h3>Resources</h3>
+<ul>
+<li>SMuFL code points: <a href="https://w3c.github.io/smufl/latest/tables/extended-helmholtz-ellis-accidentals-just-intonation.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/extended-helmholtz-ellis-accidentals-just-intonation.html</a></li>
+</ul>
+<h2>Sagittal</h2>
+<p>Developed from 2001 by by George D. Secor and David C. Keenan in collaboration with others on Yahoo Groups tuning and tuning-math, and later on the Sagittal forum. Most symbols seem to have been settled on in the early 2000s, but the resources on the website are still being updated with minor tweaks. Many symbols are available, but most music only requires a small subset of them. The subset of the most commonly needed symbols is called Spartan.</p>
+<p>Two versions of the system are proposed: one using only the the new Sagittal symbols, called Revo for Revolutionary, and one using compound symbols of Sagittal and standard accidentals called Evo for Evolutionary. As usual in microtonality land there are many names for the same thing so the Evo variant is also called "mixed Sagittal" or "mixed Spartan Sagittal".</p>
+<p>Sagittal also includes a pronunciation for each single shaft accidental: Sagispeak. Multi shaft accidentals have to be translated to their mixed Sagittal equivalent for pronunciation. The sagispeak names are meant to be as easy as possible to pronounce in as many languages as possible. The standard accidental part is simply spoken in whatever language the speaker is communicating through. 15\53 may therefore be pronounced as "E flat fai" in English and "ess-fai" in Swedish (ph -&gt; f). The ups and downs equivalent would be "up-up E flat" and "upp-upp-ess" respectively.</p>
+<h3>Downsides</h3>
+<ul>
+<li>Niche system constructed from scratch, so the Revo(lutionary) version gets rid of conventional accidentals.</li>
+<li>Very few musicians can read it since it's relatively new.</li>
+<li>Many new symbols in the Revo version.</li>
+</ul>
+<h3>Upsides</h3>
+<ul>
+<li>Large well visible symbols</li>
+<li>Well thought out system adapted for EDOs and JI alike</li>
+<li>Well documented</li>
+<li>Every symbol has a standard pronunciation that works in most or all languages.</li>
+<li>Every symbol has a standardised ASCII notation.</li>
+<li>Breaking with historical symbols may be clearer than repurposing them.</li>
+</ul>
+<h3>Resources</h3>
+<ul>
+<li>Website: <a href="https://sagittal.org/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://sagittal.org/</a></li>
+<li>Introductory article: <a href="https://sagittal.org/sagittal.pdf" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://sagittal.org/sagittal.pdf</a></li>
+<li>Structured overview of all Sagittal symbols, including their pronunciation and ASCII representation: <a href="https://sagittal.org/Sagittal-SMuFL-Map.pdf" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://sagittal.org/Sagittal-SMuFL-Map.pdf</a></li>
+<li>Forum: <a href="https://forum.sagittal.org/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://forum.sagittal.org/</a></li>
+</ul>
+<p>SMuFL code points (we only use the first two pages):</p>
+<ul>
+<li><a href="https://w3c.github.io/smufl/latest/tables/spartan-sagittal-single-shaft-accidentals.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/spartan-sagittal-single-shaft-accidentals.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/spartan-sagittal-multi-shaft-accidentals.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/spartan-sagittal-multi-shaft-accidentals.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/athenian-sagittal-extension-medium-precision-accidentals.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/athenian-sagittal-extension-medium-precision-accidentals.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/trojan-sagittal-extension-12-edo-relative-accidentals.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/trojan-sagittal-extension-12-edo-relative-accidentals.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/promethean-sagittal-extension-high-precision-single-shaft-accidentals.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/promethean-sagittal-extension-high-precision-single-shaft-accidentals.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/promethean-sagittal-extension-high-precision-multi-shaft-accidentals.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/promethean-sagittal-extension-high-precision-multi-shaft-accidentals.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/herculean-sagittal-extension-very-high-precision-accidental-diacritics.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/herculean-sagittal-extension-very-high-precision-accidental-diacritics.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/olympian-sagittal-extension-extreme-precision-accidental-diacritics.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/olympian-sagittal-extension-extreme-precision-accidental-diacritics.html</a></li>
+<li><a href="https://w3c.github.io/smufl/latest/tables/magrathean-sagittal-extension-insane-precision-accidental-diacritics.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://w3c.github.io/smufl/latest/tables/magrathean-sagittal-extension-insane-precision-accidental-diacritics.html</a></li>
+</ul>
+<h2>Music Notation Software</h2>
+<p>The new-ish (at least in music notation terms) Standard Music Font Layout (SMuFL) contains symbols for both of these systems, and more. This font is currently supported by Dorico, Musescore 2.0 and later, and Finale v27 and later. I am however unsure if Finale and MuseScore allow you to create the compound symbols that Sagittal Evo relies on. If not, a custom font (<a href="https://sagittal.org/BravuraMSS_1_19.otf" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://sagittal.org/BravuraMSS_1_19.otf</a>) is available from the Sagittal website.</p>
+<h3>Dorico</h3>
+<p>Since I currently use Dorico for notating music I am providing my Tonality system files for all three systems above. Using these tonality systems Dorico also plays back the correct pitch which is a very helpful tool. By changing the key signature to one from another 53edo tonality system, you can also easily and automatically produce a score with the same pitches, but a different system of accidentals. When working with musicians who prefer different systems of notation, this a huge time saver.</p>
+<p>Tonality system files:</p>
+<ul>
+<li><a href="/blog/53edo-staff-notation/53edo Sagittal Revo.doricolib">53edo Sagittal Revo.doricolib</a></li>
+<li><a href="/blog/53edo-staff-notation/53edo Sagittal Evo.doricolib">53edo Sagittal Evo.doricolib</a></li>
+<li><a href="/blog/53edo-staff-notation/53edo HEJI2.doricolib">53edo HEJI2.doricolib</a></li>
+</ul>
+<h3>Lilypond</h3>
+<p>Sagittal is allegedly easy to use in Lilypond. I have yet to try, but this is the resource: <a href="http://x31eq.com/lilypond/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">http://x31eq.com/lilypond/</a></p>
+<h2>My Own Conclusions</h2>
+<p>For a while now I've been using HEJI2 to notate my 53edo music. I found the fact that the symbols were all standard accidentals with arrow very easy to understand and work with. The fact that the 53edo step size is so close to a syntonic comma, which the HEJI2 arrow represents, is really neat. I did however notice some issues, especially when I was done writing and was playing from the music on a music stand some distance away. When using 1, 2 or 3 arrows on one accidental it is really hard to tell how many arrows there are. The arrows are also hard to write in a clear manner by hand without it being even more difficult to tell if its one smudgy arrow or several. Since the HEJI2 symbols with many arrows are also very tall, chords with crunch voicings are hard to read and take up a lot of space on the page.</p>
+<p>For these reasons I have started experimenting with using Sagittal Revo instead. While there are quite a few symbols to learn, they are very logical and there is an elegance in the fact that the accidentals have been officially chosen to represent 53edo. It is far easier to read from a distance since every shape is distinct and chords are slightly easier to read as well IMHO.  I will continue exploring how well Sagittal will work in practice in the meeting with other musicians.</p>
+<p>I am not sure about how I like the Sagittal pronunciation of pitches yet. Since it doesn't have separate words for all symbols, instead using Sagittal Evo for the pronouncable names, I think Ups and downs notation may be more intuitive, although Sagispeak is often shorter. Sagispeak may be beneficial in a mixed tonality system context since the words refer to the approximate sizes of the steps however, and using Ups and downs would then be confusing since unless you always append the division.</p>
+<h2>Other Notation Systems</h2>
+<p>Systems not discussed here include:</p>
+<ul>
+<li><a href="https://en.xen.wiki/w/Syntonic-rastmic_subchroma_notation" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://en.xen.wiki/w/Syntonic-rastmic_subchroma_notation</a></li>
+<li><a href="https://en.xen.wiki/w/Ben_Johnston's_notation" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://en.xen.wiki/w/Ben_Johnston%27s_notation</a></li>
+</ul>
+<p>Ups and downs notation has been mentioned very briefly. I may produce a comparison with ups and downs staff notation in the future. In the meantime:</p>
+<ul>
+<li><a href="https://www.tallkite.com/misc_files/notation guide for edos 5-72.pdf" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://www.tallkite.com/misc_files/notation%20guide%20for%20edos%205-72.pdf</a></li>
+</ul>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/combining-rust-and-cpp-code-in-your-bela-project"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/neod-1-evaluation">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+<div class="sidebar-content">
+    <h4>Popular Tags</h4>
+    
+<span class="tags">
+                    <a class="label label-rounded label-secondary" href="/blog/tag:53edo">53edo</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:music">music</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:DMI">DMI</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:scarda">scarda</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:Neod">Neod</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:sustainability">sustainability</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:audiovisual">audiovisual</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:point clouds">point clouds</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:harmony">harmony</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:programming">programming</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:rust">rust</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:bela">bela</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:reflections">reflections</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:visuals">visuals</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:development">development</a>
+    </span>
+</div>
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section">
+    <section class="container grid-lg">
+        <p>© Erik Natanael Gustafsson 2023
+        <i class="fa fa-heart-o pulse "></i>
+        <a href="https://www.facebook.com/eriknatanaelmusic"/><i class="fa fa-facebook"></i></a>
+        <a href="https://www.instagram.com/eriknatanaelgustafsson/"/><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UC4vTCi42E4oiPGbbUqAh6hQ"/><i class="fa fa-youtube"></i></a>
+        <a href="https://github.com/ErikNatanael"/><i class="fa fa-github"></i></a>
+        <a href="mailto:e&#114;ik&#64;er&#105;&#107;n&#97;t&#97;&#110;&#97;e&#108;&#46;c&#111;m"/><i class="fa fa-envelope-o"></i></a> </p>
+    </section>
+</section>
+    
+    <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+            </nav>
+        </div>
+    </div>
+
+    <script src="/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>

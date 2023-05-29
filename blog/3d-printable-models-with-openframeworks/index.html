@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>3D printable models with openFrameworks | Erik Natanael Gustafsson</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="For a rethread.art project we wanted to make a sculpture out of a dataset consisting of javascript function calls being executed in the browser when searching the web. Of course my first thought was that shouldn't be too hard. By documenting the process here, I hope that next time maybe it won't be.. Have a look at the" />
+    <meta name="keywords" content="music, live electronics, DMI, digital musical instrument, audiovisual, composer" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="https://eriknatanael.comblog/3d-printable-models-with-openframeworks" />
+
+                        
+            
+    <link href="/user/plugins/breadcrumbs/css/breadcrumbs.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/external_links/assets/css/external_links.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/form/assets/form-styles.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/youtube/css/youtube.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/highlight/css/ir-black.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.gallery.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/login/css/login.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre-exp.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/system/assets/jquery/jquery-2.x.min.js"></script>
+<script src="/user/plugins/highlight/js/highlight.pack.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.min.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.gallery.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+<script>
+$(document).ready(function(){
+    $('a[rel="lightbox"]').featherlightGallery({
+        openSpeed: 250,
+        closeSpeed: 250,
+        closeOnClick: 'background',
+        closeOnEsc: '1',
+        root: 'body'
+    });
+});
+</script>
+
+</head>
+<body id="top" class=" header-fixed header-animated header-dark header-transparent sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+                                <section id="blog-hero" class="section modular-hero hero text-dark parallax title-h1h2 overlay-light-gradient " style="background-image: url(/user/pages/07.blog/3d-printable-models-with-openframeworks/IMG_20200226_133606817.jpg);">
+    <div class="image-overlay"></div>
+    <section class="container grid-lg" style="text-align: center">
+                    <h1>3D printable models with openFrameworks</h1>
+            <h2></h2>
+            <span class="blog-date">
+    <time class="dt-published" datetime="2020-02-27T19:27:00+01:00">
+        <i class="fa fa-calendar"></i> 27th Feb 2020
+    </time>
+</span>
+                    
+    </section>
+    <i id="to-start" class="pulse fa fa-angle-down"></i>
+</section>
+    
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+                    
+<div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/" itemid="/">
+                    <span itemprop="name">Home</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="1" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/blog" itemid="/blog">
+                    <span itemprop="name">Blog</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="2" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span itemscope itemtype="http://schema.org/Thing" itemprop="item" itemid="/blog/3d-printable-models-with-openframeworks">
+                    <span itemprop="name">3D printable models with openFrameworks</span>
+                </span>
+                            <meta itemprop="position" content="3" />
+    </span>
+    </div>
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="e-content">
+        <p>For a <a href="https://rethread.art" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">rethread.art</a> project we wanted to make a sculpture out of a dataset consisting of javascript function calls being executed in the browser when searching the web. Of course my first thought was "that shouldn't be too hard". By documenting the process here, I hope that next time maybe it won't be.</p>
+
+<p><a href="https://github.com/ErikNatanael/re-quest-sonic/blob/master/src/ModelExport.h" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">Have a look at the code on GitHub.</a></p>
+<p>Throughout the project, Blender has been immensly helpful for inspecting the meshes created. Especially the 3d-Print Toolbox has been invaluable for finding rare bugs and exactly which vertices are affected.</p>
+<p><img alt="" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/IMG_20200226_120613128_HDR.jpg" /></p>
+<h2>The Wrong Way</h2>
+<p><em>To be honest there's nothing wrong with this technique if all you want is a plane with mountains. Except that you might get huuuuuge files that will eat your memory for breakfast and crash Fusion 360 and Cura (Blender amazingly managed to open even the very hugest files, although it took a few minutes).</em></p>
+<p>My first go at parametrically generating a 3D printable model was to make a plane where the y axis is offset by by a certain force at each vertex. The openFrameworks docs have helpfully provided an example of how to construct the plane in the <a href="https://openframeworks.cc/documentation/3d/ofMesh/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">ofMesh docs</a>. The rest was simple enough: store all the points where you want to offset the plane together with the radius of their influence and the offset at their peaks. Then use a curve to apply to the gravity level within the radius (smoothcurve1 or smoothcurve2 below, inspired by the smoothstep function in GLSL). For each vertex on the plane, get the offset (or the "gravity") from all AttractionPoints and add them together. Easy peasy!</p>
+<pre><code class="language-cpp">class AttractionPoint {
+public:
+  glm::vec2 pos;
+  float gravity; // the strength of the gravity pull
+  float radius; // the maximum radius of influence over which the gravity strength is interpolated
+  AttractionPoint(glm::vec2 p, float g, float r): pos(p), gravity(g), radius(r) {}
+
+  float getGravity(glm::vec2 p) {
+    float distance = glm::distance(pos, p);
+    if(distance &gt; radius) return 0.0f;
+    float amount = 1. - (distance/radius);
+    // add a nice curve to the gravity influence of the point
+    amount = pow(amount, 3.);
+    amount = smoothcurve2(amount);
+    return gravity * amount;
+  }
+
+  // these functions assume a value 0-1
+  float smoothcurve1(float x) {
+    return x * x * (3 - 2 * x);
+  }
+  float smoothcurve2(float x) {
+    return x * x * x * (x * (x * 6 - 15) + 10);
+  }
+};</code></pre>
+<p>This created a very detailed and smooth plane that felt amazing when 3D printed. Unfortunately a bit too detailed, the model couldn't even be opened in Fusion 360 for editing. The real issue, though, was when we decided we needed holes that went through the mesh to the bottom. Each function in the dataset would be a hole, each script a hill.</p>
+<p><img alt="Smooth detailed mesh" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/smooth_detailed_mesh.jpg" /></p>
+<p>I tried to adapt the plane idea by pulling down vertices to the base plate, leaving vertices out if they fell into a hole and used all sorts of (what I thought was) clever tricks. Blender became my best friend, as it actually let me open and inspect the mesh, albeit after a few minutes of wait. The 3D printing toolkit let me see just how messed up the model was (hundreds of thousands of non-manifold edges etc.).</p>
+<p><img alt="Messed up holes with holes in them" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/holey_holes.jpg" /></p>
+<p>After trying to brute force it by raising the resolution for far too long I decided to do it the right way.</p>
+<h2>The Right Way</h2>
+<p>For a model to be 3d printable</p>
+<ul>
+<li>every edge should be connected to exactly 2 faces
+<ul>
+<li>if an edge is connected to only one face the model has a hole</li>
+<li>if an edge is connected to more than two faces it's ambiguous</li>
+</ul></li>
+<li>no faces should intersect since intersecting faces make it hard to tell what is inside and what is outside</li>
+</ul>
+<p>Additionally, the normals, i.e. what side of the triangle faces in or out, should be consistent in the whole model. When making triangles manually, the order of the vertices (the "winding" of the triangle) is what decides its normal.</p>
+<h3>Delaunay Triangulation</h3>
+<p>A better way of creating a custom mesh is to use a proper triangulation algorithm that you can feed points and get triangles. Delaunay triangulation is one such algorithm and luckily OpenCV already has an implementation of it, hidden in the Subdiv2D class. With the ofxCv addon, OpenCV is quite easy to use within openFrameworks.</p>
+<p>OpenCV Subdiv2D is quite particular about the coordinates you feed it.</p>
+<ul>
+<li>The max widtand height are non-inclusive so make sure your maximum
+point is less than the width/height.</li>
+<li>Feeding it any number outside of its bounding box causes an abrupt crash.</li>
+<li>It also doesn't like negative coordinates it seems. </li>
+<li>OpenCV <code>Point</code>s are integers which is another pitfall when trying to find points after triangulation since openFrameworks <code>Point</code>s (which are really glm::vec3) use floats. The easy solution is to scale up the model until you get the resolution you need. Since we're not doing a vertex per pixel anymore this doesn't increase the complexity or disk size of the model.</li>
+</ul>
+<p>Also, Delaunay Triangulation looks pretty cool just by itself, doesn't it?</p>
+<p><img alt="Triangles, lots of triangles" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/Delunay_triangulation.jpg" /></p>
+<p>This also means that every AttractionPoint needs generate the points (vertices) to be used for the triangulation, with the added benefit that the resolution of the slope can be fine-tuned:</p>
+<pre><code class="language-cpp">class AttractionPoint {
+public:
+  // [...]
+
+  vector&lt;glm::vec2&gt; getPoints() {
+    vector&lt;glm::vec2&gt; points;
+    points.push_back(pos);
+    int numCircles = 10;
+    for(int i = 1; i &lt;= numCircles; i++) {
+      int numPointsPerCircle = max(4.0, (radius/numCircles) * 0.1 * i);
+      for(int k = 0; k &lt; numPointsPerCircle; k++) {
+        float angle = (TWO_PI/numPointsPerCircle) * k;
+        float r = (radius/numCircles) * i;
+        glm::vec2 tp = pos + glm::vec2(cos(angle)*r, sin(angle)*r);
+        // round to nearest integer because OpenCV Points are using integers
+        tp = glm::round(tp);
+        points.push_back(tp);
+      }
+    }
+    return points;
+  }
+  // [...]
+};</code></pre>
+<p>The main part of the triangulation is in this snippet:</p>
+<pre><code class="language-cpp">Subdiv2D subdivTop = Subdiv2D(rect);
+for(auto&amp; p : topPoints) {
+  // only add points within bounds, points outside the rect can lead to a crash in OpenCV
+  if(p.x &gt;= minW &amp;&amp; p.x &lt; minW + width &amp;&amp; p.y &gt;= minH &amp;&amp; p.y &lt; minH + height) {
+    subdivTop.insert(toCv(p));
+  }
+}
+// triangulate using Delaunay triangulation and put the results in triangleList which is a vector&lt;Vec6f&gt;
+subdivTop.getTriangleList(triangleList);
+
+for( size_t i = 0; i &lt; triangleList.size(); i++ ) {
+  // process the triangles one at a time
+  Vec6f t = triangleList[i];
+  pt[0] = Point(t[0], t[1]);
+  pt[1] = Point(t[2], t[3]);
+  pt[2] = Point(t[4], t[5]);
+
+  // add triangles to the mesh
+  if (rect.contains(pt[0]) &amp;&amp; rect.contains(pt[1]) &amp;&amp; rect.contains(pt[2])) {
+    // used to store the indices of the vertexes used in the mesh (reused old vertexes or newly created)
+    int pointIndices[3]; 
+
+    int numPointsInHole = 0;
+    size_t lastHoleIndex = -1; // the index of the last point that was a hole point
+    // true if points belong to holes, but different holes. only filter out triangles where all points belong to the same hole
+    bool differentHoles = false; 
+    for(int i = 0; i &lt; 3; i++) {
+      auto&amp; p = pt[i];
+      int holeMeshIndex = currentIndex;
+      // check if the point is already in the topIndexedPoints list of previous points
+      IndexedPoint ip = IndexedPoint(toOf(p), currentIndex);
+      auto pointIt = std::find(topIndexedPoints.begin(), topIndexedPoints.end(), ip);
+      if(pointIt != topIndexedPoints.end()) {
+        // point already exists, use it
+        pointIndices[i] = pointIt-&gt;index;
+        holeMeshIndex = pointIt-&gt;index;
+      } else {
+        // point is new, create it
+        float offset = getGravityAtPoint(toOf(p));
+        mesh.addVertex(ofPoint(p.x, offset, p.y));
+
+        // check if the point is a corner, in that case we save the index for the walls
+        for(int i = 0; i &lt; numWallPoints; i++) {
+          if(toOf(p) == wallPoints[i]) topCornerIndices.push_back(IndexedPoint(toOf(p), currentIndex));
+        }
+        pointIndices[i] = currentIndex;
+        topIndexedPoints.push_back(ip);
+        currentIndex++;
+      }
+      // check if the point is in a hole's point list. if it is, add it as an index in that hole
+      size_t holeIndex = isPointInHoleThenAddIndex(toOf(p), Plane::TOP, holeMeshIndex);
+      if(holeIndex != -1) {
+        // the point belonged to a hole
+        numPointsInHole++;
+        // if the holeIndex (which is a unique identifier for a hole, not a point in a hole) is not
+        // the same as the last hole found, the hole points belong to different holes
+        if(lastHoleIndex == -1) lastHoleIndex = holeIndex;
+        else if(holeIndex != lastHoleIndex) {
+          differentHoles = true;
+        }
+      }
+    }
+    // don't add the triangle if all points are hole points from the same hole
+    if(numPointsInHole &lt; 3 || differentHoles) {
+      mesh.addIndex(pointIndices[2]);
+      mesh.addIndex(pointIndices[1]);
+      mesh.addIndex(pointIndices[0]);
+    }
+  }
+}</code></pre>
+<h3>Manifold edges</h3>
+<p>With the Subdiv2D algorithm you feed it with points and you get triangles back. That means that the same point will be given back to you several times when it is part of different triangles. Because we don't want to add the same point several times to the same mesh we need to manually keep track of them and their index in the mesh. That way, whenever we get a vertex from the triangulation we can check if it's already in the mesh and if so what index it has. This is especially crucial for applying filters to the holes and walls as outlined below.</p>
+<h3>Holes</h3>
+<p>With the Delaunay triangulation in place, I could just add points for the hole and the algorithm would make triangles around them. Adding the same points for both the top and bottom planes meant I could just connect those with triangles like a cylinder. This came with the added benefit of being able to decide on the resolution for the holes.</p>
+<p>Here are the interesting parts of the HolePoint class:</p>
+<pre><code class="language-cpp">class HolePoint {
+public:
+  glm::vec2 pos;
+  // if points are added too close to a hole the Delaunay triangulation can create triangles
+  // covering the hole and creating non-manifold edges. Therefore a clearence radius is needed.
+  float clearRadius;
+  float holeRadius;
+  vector&lt;IndexedPoint&gt; topPlaneHoleIndices;
+  vector&lt;IndexedPoint&gt; bottomPlaneHoleIndices;
+  vector&lt;glm::vec2&gt; cirPoints; // contains cylinder points and wall points if there are any
+  vector&lt;glm::vec2&gt; wallPoints; // only contains the wall points
+
+  HolePoint(glm::vec2 p, float cr, float hr): pos(p), clearRadius(cr), holeRadius(hr) {}
+
+  HoleRelation insideHole(glm::vec2 p) {
+    float distance = glm::distance(pos, p);
+    if(distance &lt; holeRadius) return HoleRelation::HOLE;
+    else if (distance &lt; clearRadius) return HoleRelation::CLEARANCE;
+    return HoleRelation::NONE;
+  }
+
+  void generateCircumferencePoints() {
+    cirPoints.clear();
+    int numPoints = 6;
+    for(int i = 0; i &lt; numPoints; i++) {
+      float angle = (TWO_PI/numPoints) * i;
+      glm::vec2 tp = glm::vec2(pos.x + cos(angle) * holeRadius, pos.y + sin(angle) * holeRadius);
+      // round to nearest integer because OpenCV Points are using integers
+      tp = glm::round(tp);
+      cirPoints.push_back(tp);
+    }
+  }
+
+  void addIndex(glm::vec2 p, Plane plane, size_t index) {
+    IndexedPoint ip = IndexedPoint(p, index);
+    if(plane == Plane::TOP) {
+      // add the point only if it does not already exist
+      // this would perhaps be cleaner with an std::set
+      if(find(topPlaneHoleIndices.begin(), topPlaneHoleIndices.end(), ip) == topPlaneHoleIndices.end())
+        topPlaneHoleIndices.push_back(ip);
+    } else if (plane == Plane::BOTTOM) {
+      if(find(bottomPlaneHoleIndices.begin(), bottomPlaneHoleIndices.end(), ip) == bottomPlaneHoleIndices.end())
+        bottomPlaneHoleIndices.push_back(ip);
+    }
+  }
+
+  void addCylinderToMesh(ofMesh&amp; mesh) {
+    if(topPlaneHoleIndices.size() != bottomPlaneHoleIndices.size()) {
+      ofLogError("HolePoint::addCylinderToMesh") &lt;&lt; "top and bottom hole index vectors have different sizes";
+      ofLogError("HolePoint::addCylinderToMesh") &lt;&lt; "top: " &lt;&lt; topPlaneHoleIndices.size();
+      for(auto&amp; ip : topPlaneHoleIndices) {
+        ofLogError("HolePoint::addCylinderToMesh") &lt;&lt; ip.index &lt;&lt; " " &lt;&lt; ip.pos.x &lt;&lt; ", " &lt;&lt; ip.pos.y;
+      }
+      ofLogError("HolePoint::addCylinderToMesh") &lt;&lt; "bottom: " &lt;&lt; bottomPlaneHoleIndices.size();
+      for(auto&amp; ip : bottomPlaneHoleIndices) {
+        ofLogError("HolePoint::addCylinderToMesh") &lt;&lt; ip.index &lt;&lt; " " &lt;&lt; ip.pos.x &lt;&lt; ", " &lt;&lt; ip.pos.y;
+      }
+    }
+    // sort the points in circular order
+    // 1. calculate the angles of the points in polar coordinates relative to the center of the hole
+    for(auto&amp; i : topPlaneHoleIndices) {
+      i.calculateAngle(pos);
+    }
+    for(auto&amp; i : bottomPlaneHoleIndices) {
+      i.calculateAngle(pos);
+    }
+    // 2. sort the points
+    std::sort(topPlaneHoleIndices.begin(), topPlaneHoleIndices.end());
+    std::sort(bottomPlaneHoleIndices.begin(), bottomPlaneHoleIndices.end());
+
+    // create the cylinder
+    for (int i = 0; i &lt; topPlaneHoleIndices.size(); i++){
+      // for the last wall we want to wrap around to the first point
+      int nextIndex = (i+1)%(topPlaneHoleIndices.size());
+      // filter out pieces belonging to a wall
+      bool isWallPiece = false;
+      // if both positions exist in the wallPoints vector the segment is a wall segment that should not be
+      if(find(wallPoints.begin(), wallPoints.end(), topPlaneHoleIndices[i].pos) != wallPoints.end()
+        &amp;&amp; find(wallPoints.begin(), wallPoints.end(), topPlaneHoleIndices[nextIndex].pos) != wallPoints.end()) 
+      {
+        isWallPiece = true;
+      }
+      if(!isWallPiece) {
+        mesh.addIndex(bottomPlaneHoleIndices[i].index);           // 10
+        mesh.addIndex(topPlaneHoleIndices[nextIndex].index);           // 1
+        mesh.addIndex(topPlaneHoleIndices[i].index);               // 0
+
+        mesh.addIndex(bottomPlaneHoleIndices[i].index);           // 10
+        mesh.addIndex(bottomPlaneHoleIndices[nextIndex].index);       // 11
+        mesh.addIndex(topPlaneHoleIndices[nextIndex].index);           // 1
+      }
+    }
+  }
+};</code></pre>
+<p>There were a few more hiccups on my quest for a completely manifold mesh with holes. Because of how the Delaunay triangulation works, a point very close to a hole can skip the closest point when forming triangles leading to non-manifold edges over the hole:</p>
+<p><img alt="Hole covered by a face" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/covered_hole_highlights.jpg" /></p>
+<p>The simple solution to this was to filter out non-hole points that were too close to a hole. This, with a few more tiny tweaks, was enough to create a proper working mesh if the whole thing could be made in one piece.</p>
+<p><img src="/blog/3d-printable-models-with-openframeworks/working_mesh1.jpg" alt="Whole mesh working" /></p>
+<p>But we wanted it much bigger than the 3d printer could manage in one go so we're back to splitting it into a grid. The sides of the mesh had problems with non-manifold edges: the triangulation algorithm doesn't want to make triangles that are too skinny (where one angle is much larger than the others) so a point close to the edge would not connect with the wall points if that would result in a skinny triangle. Solution: filter out points too close to the wall and use more wall points per walls to create less skinny triangles that connect to the wall. Success! (with slightly lower resolution right at the edge)</p>
+<p><img alt="Grid pieces with clear edges" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/Delunay_triangulation_on_grid.jpg" /></p>
+<p>At this point the mesh had no non-manifold edges, but the holes would still not go all the way through when the model was sliced in Cura. Turns out the normals of the walls were flipped compared to all the other normals so just winding the wall triangles the other way flipped the normals right and let the holes pass all the way through.</p>
+<p><img alt="Normals corrected" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/correct_normals.jpg" /></p>
+<p>Cutting this mesh into a grid of pieces caused two new problems: the indices from the last piece have to be cleared between pieces (easy) and walls intersecting with a hole have to be broken up (harder). The solution to the latter issue was in four steps:</p>
+<ol>
+<li>For each hole, check if the hole intersects with a wall and if it does, add the two points where the hole intersects the wall to the hole and to the wall.</li>
+<li>Remove any wall points that fall into a hole.</li>
+<li>Filter out wall segments where all points are hole points or where the mid point falls in a hole.</li>
+<li>When making the hole cylinders, don't create a segment between two points that are part of the wall.</li>
+</ol>
+<p>Doing all of this resulted in this cleanly sliced mesh:</p>
+<p><img alt="Holes through walls" src="/user/pages/07.blog/3d-printable-models-with-openframeworks/holes_through_walls.jpg" /></p>
+<p>Hope this is useful for someone, even if that someone is myself in a year!</p>
+<p>Resources:</p>
+<ul>
+<li><a href="https://www.hubs.com/knowledge-base/fixing-most-common-stl-file-errors/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://www.hubs.com/knowledge-base/fixing-most-common-stl-file-errors/</a></li>
+<li><a href="https://pages.mtu.edu/~shene/COURSES/cs3621/SLIDES/Mesh.pdf" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://pages.mtu.edu/~shene/COURSES/cs3621/SLIDES/Mesh.pdf</a>  </li>
+<li><a href="https://en.wikipedia.org/wiki/Delaunay_triangulation" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://en.wikipedia.org/wiki/Delaunay_triangulation</a>  </li>
+</ul>
+<p><a href="https://rethread.art" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">rethread.art</a> is a KTH project supported by <a href="https://www.castor.kth.se/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">CASTOR</a>, <a href="https://wasp-sweden.org/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">WASP</a> and <a href="https://iod-project.eu/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">IoD</a>.</p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/top-5-takeaways-from-transmediale-2020-end-to-end"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/monophonic-53edo-pitch-input-prototype">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+<div class="sidebar-content">
+    <h4>Popular Tags</h4>
+    
+<span class="tags">
+                    <a class="label label-rounded label-secondary" href="/blog/tag:53edo">53edo</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:music">music</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:DMI">DMI</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:scarda">scarda</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:Neod">Neod</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:sustainability">sustainability</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:audiovisual">audiovisual</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:point clouds">point clouds</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:harmony">harmony</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:programming">programming</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:rust">rust</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:bela">bela</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:reflections">reflections</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:visuals">visuals</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:development">development</a>
+    </span>
+</div>
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section">
+    <section class="container grid-lg">
+        <p>© Erik Natanael Gustafsson 2023
+        <i class="fa fa-heart-o pulse "></i>
+        <a href="https://www.facebook.com/eriknatanaelmusic"/><i class="fa fa-facebook"></i></a>
+        <a href="https://www.instagram.com/eriknatanaelgustafsson/"/><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UC4vTCi42E4oiPGbbUqAh6hQ"/><i class="fa fa-youtube"></i></a>
+        <a href="https://github.com/ErikNatanael"/><i class="fa fa-github"></i></a>
+        <a href="mailto:&#101;rik&#64;&#101;&#114;ik&#110;a&#116;a&#110;&#97;el&#46;c&#111;m"/><i class="fa fa-envelope-o"></i></a> </p>
+    </section>
+</section>
+    
+    <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+            </nav>
+        </div>
+    </div>
+
+    <script src="/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>

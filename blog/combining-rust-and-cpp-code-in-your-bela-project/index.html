@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Combining Rust and C++ code in your Bela project | Erik Natanael Gustafsson</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="Want to use some of your Rust code in a Bela project, but don't know how to get all the bits to talk to each other? Neither did I, so I figured it out and wrote it down so you don't have to. And to save my future self from the frustration of figuring it all out again.. This post will go through setting up the toolchain" />
+    <meta name="keywords" content="music, live electronics, DMI, digital musical instrument, audiovisual, composer" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="https://eriknatanael.comblog/combining-rust-and-cpp-code-in-your-bela-project" />
+
+                        
+            
+    <link href="/user/plugins/breadcrumbs/css/breadcrumbs.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/external_links/assets/css/external_links.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/form/assets/form-styles.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/youtube/css/youtube.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/highlight/css/ir-black.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/featherlight/css/featherlight.gallery.min.css" type="text/css" rel="stylesheet">
+<link href="/user/plugins/login/css/login.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/spectre-exp.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/system/assets/jquery/jquery-2.x.min.js"></script>
+<script src="/user/plugins/highlight/js/highlight.pack.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.min.js"></script>
+<script src="/user/plugins/featherlight/js/featherlight.gallery.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+<script>
+$(document).ready(function(){
+    $('a[rel="lightbox"]').featherlightGallery({
+        openSpeed: 250,
+        closeSpeed: 250,
+        closeOnClick: 'background',
+        closeOnEsc: '1',
+        root: 'body'
+    });
+});
+</script>
+
+</head>
+<body id="top" class=" header-fixed header-animated header-dark header-transparent sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+                    
+<div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/" itemid="/">
+                    <span itemprop="name">Home</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="1" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="/blog" itemid="/blog">
+                    <span itemprop="name">Blog</span>
+                </a>
+                        <i class="fa fa-angle-right"></i>
+                <meta itemprop="position" content="2" />
+    </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span itemscope itemtype="http://schema.org/Thing" itemprop="item" itemid="/blog/combining-rust-and-cpp-code-in-your-bela-project">
+                    <span itemprop="name">Combining Rust and C++ code in your Bela project</span>
+                </span>
+                            <meta itemprop="position" content="3" />
+    </span>
+    </div>
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/combining-rust-and-cpp-code-in-your-bela-project" class="u-url">Combining Rust and C++ code in your Bela project</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2021-09-06T20:12:00+02:00">
+        <i class="fa fa-calendar"></i> 6th Sep 2021
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:programming#body-wrapper">programming</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:rust#body-wrapper">rust</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:bela#body-wrapper">bela</a>
+    </span>
+    </div>
+    <div class="e-content">
+        <p>Want to use some of your Rust code in a Bela project, but don't know how to get all the bits to talk to each other? Neither did I, so I figured it out and wrote it down so you don't have to. And to save my future self from the frustration of figuring it all out again.</p>
+
+<p>This post will go through setting up the toolchain to compile a Rust library for the Beaglebone Black, how to write your Rust library so that it can interface with the C++ code of your existing Bela project and how to get it onto the Bela and run it in a project. It is not meant as an exhaustive resource on any of these subjects, just a series of pointers to get you moving in the right direction.</p>
+<p><img alt="C++ heart Rust" src="/images/e/a/d/5/5/ead558470ead4395ec445726fc494bb15b2626f1-rustcpplove.jpg" /></p>
+<p>I owe this knowledge to the excellent writers of blog posts, forum posts and project documentations that explain these topics in much more depth. Some of these sources are listed below:</p>
+<ul>
+<li><a href="https://michael-f-bryan.github.io/rust-ffi-guide/print.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://michael-f-bryan.github.io/rust-ffi-guide/print.html</a></li>
+<li><a href="https://github.com/eqrion/cbindgen/blob/master/docs.md" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://github.com/eqrion/cbindgen/blob/master/docs.md</a></li>
+<li><a href="https://rust-lang.github.io/libc/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://rust-lang.github.io/libc/</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#using-extern-functions-to-call-external-code" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#using-extern-functions-to-call-external-code</a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/slice/fn.from_raw_parts.html" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://doc.rust-lang.org/stable/std/slice/fn.from_raw_parts.html</a></li>
+<li><a href="https://electric-snow.net/2021/08/26/rust-heart-bela-setting-up-cargo-for-cross-compilation/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://electric-snow.net/2021/08/26/rust-heart-bela-setting-up-cargo-for-cross-compilation/</a></li>
+</ul>
+<p>If you have no need for any C++ nonsense (e.g. peripheral libraries) you can use one of the Rust wrappers for the core Bela library e.g.:</p>
+<ul>
+<li><a href="https://github.com/l0calh05t/bela-rs/tree/next" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://github.com/l0calh05t/bela-rs/tree/next</a></li>
+</ul>
+<h2>How to generate a C compatible library from Rust</h2>
+<p>To use Rust code from C it needs to be built into a static library compatible with C, and the C compiler needs a header file to know what stuff is available in the static library. That means a <code>.a</code> and a <code>.h</code> file.</p>
+<h3>Set up Cargo to generate a shared library compatible with the C ABI</h3>
+<p>Make sure there is an entry in Cargo.toml looking something like</p>
+<pre><code class="language-toml">[lib]
+name = "libneod-rs"
+path = "src/lib.rs"
+crate-type = ["staticlib"]</code></pre>
+<p>All functions that shall be available from C need <code>pub extern "C"</code> before the <code>fn</code> and <code>#[no_mangle]</code> on the preceeding line.</p>
+<p>The easiest way to set up cbindgen IMHO is to create a build.rs file in the root of the crate containing the following:</p>
+<pre><code class="language-rust">extern crate cbindgen;
+
+use std::env;
+
+fn main() {
+    let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+
+    cbindgen::Builder::new()
+      .with_crate(crate_dir)
+      .with_language(cbindgen::Language::Cxx) // possible values: C, Cxx, Cython
+      .generate()
+      .expect("Unable to generate bindings")
+      .write_to_file("bindings.h");
+}</code></pre>
+<p>cbindgen also needs to be added as a build dependency in Cargo.toml:</p>
+<pre><code class="language-toml">[build-dependencies]
+cbindgen = "^0.19.0"</code></pre>
+<p>Note: A C style header in C++ code will lead to linker errors. Use the <code>Cxx</code> language option for cbindgen or wrap the header in an <code>extern "C" {}</code> block to avoid spending a day on this (time usage confirmed empirically).</p>
+<h3>Generate code for the Bela CPU</h3>
+<p>The Bela runs on a BeagleBone Black which uses an arm CPU. To generate the library for that architecture we need to install it as a target:</p>
+<pre><code>rustup target add armv7-unknown-linux-gnueabihf
+rustup toolchain install stable-armv7-unknown-linux-gnueabihf</code></pre>
+<p>I am unsure if the second line is actually required, but it was suggested somewhere.</p>
+<p>Also, place the following two lines in <code>.cargo/config</code>:</p>
+<pre><code class="language-toml">[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"
+rustflags = ["-Ctarget-cpu=cortex-a8", "-Ctarget-feature=+neon"]</code></pre>
+<p>The rustflags were suggested in <a href="https://electric-snow.net/2021/08/26/rust-heart-bela-setting-up-cargo-for-cross-compilation/" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">a blog post </a> to unlock some optimisations. You can also add the following to the same file if you'll only be building this library for the BeagleBone:</p>
+<pre><code class="language-toml">[build]
+target = "armv7-unknown-linux-gnueabihf"</code></pre>
+<h3>Constructing an oblique pointer API</h3>
+<p>We don't want the C++ code to care about or have access to the internals of the Rust struct containing all of the Rust state so we will create a raw pointer to a struct, which must be on the heap, and return it to the C++ code. This means that the memory that the pointer points to has to be manually dropped when not needed by the C++ code.</p>
+<p>To create the pointer:</p>
+<pre><code class="language-rust">/// Creates an opaque pointer to the SynthesisInterface
+///
+/// # Safety
+/// Make sure you destroy the SynthesisInterface with `destroy_synthesis_interaface`
+/// once you are done with it.
+#[no_mangle]
+pub unsafe extern "C" fn synthesis_interaface_create(
+    sample_rate: libc::c_float,
+) -&gt; *mut SynthesisInterface {
+    Box::into_raw(Box::new(SynthesisInterface::new(sample_rate as f32)))
+}</code></pre>
+<p>To drop the memory:</p>
+<pre><code class="language-rust">/// Drops the SynthesisInterface from C
+/// # Safety
+/// This will drop a SynthesisInterface if the pointer is not null. Don't give it anything
+/// other than a pointer to a SynthesisInterface gotten from `create_synthesis_interaface`.
+#[no_mangle]
+pub unsafe extern "C" fn synthesis_interaface_destroy(
+    synthesis_interface_ptr: *mut SynthesisInterface,
+) {
+    if !synthesis_interface_ptr.is_null() {
+        drop(Box::from_raw(synthesis_interface_ptr));
+    }
+}</code></pre>
+<p>Using the pointer is quite easy. By dereferencing and then immediately borrowing <code>&amp;*ptr</code> or mutably borrowing <code>&amp;mut *ptr</code> we can use the reference like normal in Rust.</p>
+<pre><code class="language-rust">#[no_mangle]
+pub unsafe extern "C" fn synthesis_interaface_process(
+    synthesis_interface_ptr: *mut SynthesisInterface,
+    num_frames: libc::size_t,
+) {
+    if synthesis_interface_ptr.is_null() {
+        eprintln!("Error: null pointer in synthesis_interaface_process");
+        return;
+    }
+    (&amp;mut *synthesis_interface_ptr).process(num_frames as usize);
+}
+</code></pre>
+<h3>Generating the static library and header file</h3>
+<p>With the build.rs setup, all that's needed is to run <code>cargo build --target=armv7-unknown-linux-gnueabihf --release</code> to generate both the header file and the shared library. The header file will be in the path specified in build.rs and the library will be in <code>target/release/</code>, both relative to the root.</p>
+<h2>How to run the Rust library on Bela</h2>
+<h3>1. Include the header file in the bela project code.</h3>
+<p>This is as simple as <code>#include "bindings.h"</code> if the <code>bindings.h</code> file is in the root. </p>
+<h3>2. Change the settings to link to a shared library.</h3>
+<p>This can be done through the web GUI in Settings-&gt;Make Parameters, or by modifying <code>settings.json</code> where the same entry is <code>"make": ""</code>
+The relevant parameters are <code>LDFLAGS</code> for setting where the linker should look for your library, and <code>LDLIBS</code> for setting what libraries to link to:</p>
+<pre><code>LDFLAGS=-L/root/LIBRARYNAME/build/lib;</code></pre>
+<pre><code>LDLIBS=-lneodrs;</code></pre>
+<p>If the library file is called <code>libneodrs.a</code>, the flag should be <code>-lneodrs</code> since the <code>lib</code> prefix and the extension are added automatically. If you're using libc for C types, you also need to link to <code>-ldl</code>.</p>
+<pre><code>RELINK=1;</code></pre>
+<p>RELINK will force a relinking against libraries every time. This makes sure the linker will always link to the current version of the Rust library.</p>
+<p>Note that each parameter is ended by a semicolon. Also note that the last parameter should not end in a semicolon, or you will not be able to set the project to boot automatically until that bug is fixed (see <a href="https://github.com/BelaPlatform/Bela/issues/641" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://github.com/BelaPlatform/Bela/issues/641</a>).</p>
+<h3>3. Compile and run the code on the Bela.</h3>
+<p>I prefer using the Bela scripts. Clone the Bela git repo, go to <code>Bela/scripts/</code>. The <code>build_project.sh</code> script will transfer your project to the Bela and compile it on the board. You can pass build options through the <code>-m</code> argument. For my project, called Neod, using the Rust library called neodrs, the full command to transfer, compile and link it is:</p>
+<pre><code>$ yes | ./build_project.sh ~/Dokument/Neod/code/Neod -m "LDFLAGS=-L/root/Bela/projects/Neod/libraries/ LDLIBS=\"-ldl -lneodrs\" RELINK=1"</code></pre>
+<p>This will overwrite the existing project without verification (because of <code>yes</code>).</p>
+<p>Note that in order to pass multiple libraries to the LDLIBS argument, escaped quotation marks are needed.</p>
+<h2>Performance</h2>
+<p>The first version of my Bela sound synthesis library in Rust was designed to do the exact same thing as the original C++.
+The Bela IDE reports CPU usage with this library at 65-67%, whereas the original C++ has a reported CPU usage at 73-85%.
+While this is all very anecdotal and unscientific, the FFI between C++ and Rust doesn't seem to have slowed things down. There is certainly room for optimization in both the old and the new code bases.</p>
+<p>The time to build the version using the Rust library is significantly longer, due to the linking stage needing to be redone for every change. Maybe it's possible to only force one library to be relinked, please get in touch if you know how to do it!</p>
+<h2>Support</h2>
+<p>If you want to support my musical experiments, please consider buying my music on bandcamp:
+<a href="https://eriknatanael.bandcamp.com" target="_blank" rel="nofollow noopener noreferrer" class="external-link no-image">https://eriknatanael.bandcamp.com</a></p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/neod-1-anortosit-neod-sound-diary-released"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/53edo-staff-notation">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+<div class="sidebar-content">
+    <h4>Popular Tags</h4>
+    
+<span class="tags">
+                    <a class="label label-rounded label-secondary" href="/blog/tag:53edo">53edo</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:music">music</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:DMI">DMI</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:scarda">scarda</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:Neod">Neod</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:sustainability">sustainability</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:audiovisual">audiovisual</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:point clouds">point clouds</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:harmony">harmony</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:programming">programming</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:rust">rust</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:bela">bela</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:reflections">reflections</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:visuals">visuals</a>
+                    <a class="label label-rounded label-secondary" href="/blog/tag:development">development</a>
+    </span>
+</div>
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section">
+    <section class="container grid-lg">
+        <p>© Erik Natanael Gustafsson 2023
+        <i class="fa fa-heart-o pulse "></i>
+        <a href="https://www.facebook.com/eriknatanaelmusic"/><i class="fa fa-facebook"></i></a>
+        <a href="https://www.instagram.com/eriknatanaelgustafsson/"/><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UC4vTCi42E4oiPGbbUqAh6hQ"/><i class="fa fa-youtube"></i></a>
+        <a href="https://github.com/ErikNatanael"/><i class="fa fa-github"></i></a>
+        <a href="mailto:erik&#64;&#101;&#114;i&#107;&#110;atanae&#108;&#46;&#99;&#111;&#109;"/><i class="fa fa-envelope-o"></i></a> </p>
+    </section>
+</section>
+    
+    <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+    <img src="/user/themes/quark/images/logo/logo(web).svg" alt="" />
+</a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+                      <li>
+        <a href="/" class=" ">
+          Home
+        </a>
+      </li>
+                    <li>
+        <a href="/digital-musical-instruments">
+          Digital Musical Instruments
+        </a>
+        <ul>
+                            <li>
+        <a href="/digital-musical-instruments/neod" class=" ">
+          Neod
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/music" class=" ">
+          Music
+        </a>
+      </li>
+                    <li>
+        <a href="/media" class=" ">
+          Media
+        </a>
+      </li>
+                    <li>
+        <a href="/installations">
+          Installations
+        </a>
+        <ul>
+                            <li>
+        <a href="/installations/cyberglow-broms-palace" class=" ">
+          cyber|glow at the Broms palace
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/cyberglow" class=" ">
+          cyber|glow
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/rfc-675-08" class=" ">
+          RFC:675:08
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/bcm" class=" ">
+          Browser Chance Music
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/retraces_of_search" class=" ">
+          re|Traces of Search
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/the-sound-of-software-tranquillity" class=" ">
+          the sound of software tranquillity
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/brytpunkt" class=" ">
+          Brytpunkt
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/ci-poetry" class=" ">
+          ci poetry
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/nature-in-the-anthropocene" class=" ">
+          Nature in the Anthropocene
+        </a>
+      </li>
+                    <li>
+        <a href="/installations/look-in-look-out" class=" ">
+          look in | look out
+        </a>
+      </li>
+      
+        </ul>
+      </li>
+                    <li>
+        <a href="/about" class=" ">
+          About
+        </a>
+      </li>
+                    <li>
+        <a href="/blog" class="active ">
+          Blog
+        </a>
+      </li>
+      
+</ul>
+
+            </nav>
+        </div>
+    </div>
+
+    <script src="/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>
